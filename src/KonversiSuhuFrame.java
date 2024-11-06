@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -31,13 +34,14 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtInputSuhu = new javax.swing.JTextField();
+        cmbKonversi = new javax.swing.JComboBox<>();
         btnKonversi = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblHasil = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,22 +68,43 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 5, 2, 5);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jTextField1.setColumns(20);
+        txtInputSuhu.setColumns(20);
+        txtInputSuhu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtInputSuhuActionPerformed(evt);
+            }
+        });
+        txtInputSuhu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtInputSuhuKeyTyped(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel1.add(jTextField1, gridBagConstraints);
+        jPanel1.add(txtInputSuhu, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbKonversi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fahrenheit", "Kelvin", "Reamur" }));
+        cmbKonversi.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbKonversiItemStateChanged(evt);
+            }
+        });
+        cmbKonversi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbKonversiActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel1.add(jComboBox1, gridBagConstraints);
+        jPanel1.add(cmbKonversi, gridBagConstraints);
 
+        btnKonversi.setBackground(new java.awt.Color(153, 255, 153));
         btnKonversi.setText("Konversi");
         btnKonversi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,26 +114,46 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         jPanel1.add(btnKonversi, gridBagConstraints);
 
-        jLabel3.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel3.setText("Hasil...");
+        lblHasil.setForeground(new java.awt.Color(204, 255, 255));
+        lblHasil.setText("Hasil...");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
-        jPanel1.add(jLabel3, gridBagConstraints);
+        jPanel1.add(lblHasil, gridBagConstraints);
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         jRadioButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jRadioButton1.setText("jRadioButton1");
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setForeground(new java.awt.Color(204, 255, 255));
+        jRadioButton1.setText("Celcius ke Lainnya");
+        jRadioButton1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton1ItemStateChanged(evt);
+            }
+        });
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jRadioButton1, new java.awt.GridBagConstraints());
 
         jRadioButton2.setBackground(new java.awt.Color(0, 102, 102));
-        jRadioButton2.setText("jRadioButton2");
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setForeground(new java.awt.Color(204, 255, 255));
+        jRadioButton2.setText("Lainnya ke Celcius");
+        jRadioButton2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jRadioButton2ItemStateChanged(evt);
+            }
+        });
         jPanel2.add(jRadioButton2, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -116,6 +161,19 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jPanel2, gridBagConstraints);
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 0));
+        jButton1.setText("Keluar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        jPanel1.add(jButton1, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -138,8 +196,108 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKonversiActionPerformed
-        // TODO add your handling code here:
+                try {
+                    double inputTemperature = Double.parseDouble(txtInputSuhu.getText());
+                    String selectedConversion = (String) cmbKonversi.getSelectedItem();
+                    double result = 0;
+
+                    // Cek arah konversi berdasarkan JRadioButton yang dipilih
+                    if (jRadioButton1.isSelected()) {
+                        // Celcius ke skala lain
+                        switch (selectedConversion) {
+                            case "Fahrenheit":
+                                result = (inputTemperature * 9/5) + 32;
+                                break;
+                            case "Kelvin":
+                                result = inputTemperature + 273.15;
+                                break;
+                            case "Reamur":
+                                result = inputTemperature * 4/5;
+                                break;
+                        }
+                    } else if (jRadioButton2.isSelected()) {
+                        // Skala lain ke Celcius
+                        switch (selectedConversion) {
+                            case "Fahrenheit":
+                                result = (inputTemperature - 32) * 5/9;
+                                break;
+                            case "Kelvin":
+                                result = inputTemperature - 273.15;
+                                break;
+                            case "Reamur":
+                                result = inputTemperature * 5/4;
+                                break;
+                        }
+                    }
+
+                    lblHasil.setText("Hasil: " + result + " " + (jRadioButton1.isSelected() ? selectedConversion : "Celcius"));
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Input tidak valid! Masukkan angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
     }//GEN-LAST:event_btnKonversiActionPerformed
+
+    private void cmbKonversiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbKonversiItemStateChanged
+                try {
+                // Mengambil input suhu dari JTextField
+                double inputTemperature = Double.parseDouble(txtInputSuhu.getText());
+
+                String selectedConversion = (String) cmbKonversi.getSelectedItem();
+                double result = 0;
+
+                switch (selectedConversion) {
+                    case "Fahrenheit":
+                        result = (inputTemperature * 9/5) + 32; // Konversi ke Fahrenheit
+                        break;
+                    case "Kelvin":
+                        result = inputTemperature + 273.15; // Konversi ke Kelvin
+                        break;
+                    case "Reamur":
+                        result = inputTemperature * 4/5; // Konversi ke Reamur
+                        break;
+                }
+
+                // Menampilkan hasil konversi di JLabel atau JTextField hasil
+                lblHasil.setText("Hasil: " + result + " " + selectedConversion);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Input tidak valid! Masukkan angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+    }//GEN-LAST:event_cmbKonversiItemStateChanged
+
+    private void txtInputSuhuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInputSuhuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInputSuhuActionPerformed
+
+    private void cmbKonversiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbKonversiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbKonversiActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton1ItemStateChanged
+            if ( jRadioButton1.isSelected()) {
+             lblHasil.setText("Celcius ke Fahrenheit/Kelvin/Reamur"); 
+         }
+    }//GEN-LAST:event_jRadioButton1ItemStateChanged
+
+    private void jRadioButton2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jRadioButton2ItemStateChanged
+            if (jRadioButton2.isSelected()) {
+            lblHasil.setText("Fahrenheit/Kelvin/Reamur ke Celcius");
+        }
+    }//GEN-LAST:event_jRadioButton2ItemStateChanged
+
+    private void txtInputSuhuKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtInputSuhuKeyTyped
+        char c = evt.getKeyChar();
+    
+        if (!Character.isDigit(c) && c != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtInputSuhuKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,14 +337,15 @@ public class KonversiSuhuFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKonversi;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbKonversi;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblHasil;
+    private javax.swing.JTextField txtInputSuhu;
     // End of variables declaration//GEN-END:variables
 }
